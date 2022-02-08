@@ -25,13 +25,19 @@ namespace ParkyAPI.Repository
             return DbSet.Find(id);
         }
 
-        public ICollection<T> GetAll(Expression<Func<T, bool>> filter = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        public ICollection<T> GetAll(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            string includeProperties = null)
         {
             IQueryable<T> query = DbSet;
             if (filter != null)
             {
                 query = query.Where(filter);
+            }
+            if (includeProperties != null)
+            {
+                query = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Aggregate(query, (current, property) => current.Include(property));
             }
             return orderBy != null ? orderBy(query).ToList() : query.ToList();
         }
@@ -42,6 +48,10 @@ namespace ParkyAPI.Repository
             if (filter != null)
             {
                 query = query.Where(filter);
+            }
+            if (includeProperties != null)
+            {
+                query = includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Aggregate(query, (current, property) => current.Include(property));
             }
             return query.FirstOrDefault();
         }

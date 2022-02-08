@@ -11,9 +11,11 @@ namespace ParkyAPI.Repository
         {
             _db = db;
             NationalPark = new NationalParkRepository(_db);
+            Trail = new TrailRepository(_db);
         }
 
         public INationalParkRepository NationalPark { get; private set; }
+        public ITrailRepository Trail { get; private set; }
 
         public void Dispose()
         {

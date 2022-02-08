@@ -28,8 +28,7 @@ namespace ParkyAPI.Repository
             var target = _db.NationalParks.FirstOrDefault(x => x.Id == entity.Id);
             try
             {
-                target.Name = entity.Name;
-                target.State = entity.State;
+                _db.NationalParks.Update(entity);
                 _db.SaveChanges();
             }
             catch (Exception ex)
