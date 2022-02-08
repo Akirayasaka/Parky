@@ -68,7 +68,7 @@ namespace ParkyAPI.Controllers
         /// <param name="nationalParkDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateNationalPart([FromBody] NationalParkDto nationalParkDto)
+        public IActionResult CreateNationalPark([FromBody] NationalParkDto nationalParkDto)
         {
             if (nationalParkDto == null)
             {
