@@ -15,8 +15,8 @@ namespace ParkyAPI.Repository.IRepository
         /// 根據類別取得全部資料
         /// </summary>
         /// <returns></returns>
-        ICollection<T> GetAll(Expression<Func<T, bool>>? filter,
-            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy);
+        ICollection<T> GetAll(Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
 
         /// <summary>
         /// 根據條件篩選
@@ -24,7 +24,7 @@ namespace ParkyAPI.Repository.IRepository
         /// <param name="filter"></param>
         /// <param name="includeProperties"></param>
         /// <returns></returns>
-        T GetFirstOrDefault(Expression<Func<T, bool>>? filter, string? includeProperties);
+        T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null );
 
         /// <summary>
         /// 新增資料

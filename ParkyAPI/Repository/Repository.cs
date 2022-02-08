@@ -25,8 +25,8 @@ namespace ParkyAPI.Repository
             return DbSet.Find(id);
         }
 
-        public ICollection<T> GetAll(Expression<Func<T, bool>>? filter,
-            Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy)
+        public ICollection<T> GetAll(Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
             IQueryable<T> query = DbSet;
             if (filter != null)
@@ -36,7 +36,7 @@ namespace ParkyAPI.Repository
             return orderBy != null ? orderBy(query).ToList() : query.ToList();
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>>? filter, string? includeProperties)
+        public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null)
         {
             IQueryable<T> query = DbSet;
             if (filter != null)
