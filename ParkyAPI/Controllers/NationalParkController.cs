@@ -43,7 +43,7 @@ namespace ParkyAPI.Controllers
 
         /// <summary>
         /// 取單筆資料[GET]
-        /// Postman Url: https://localhost:7063/api/nationalPark/3
+        /// Postman Url: https://localhost:7063/api/nationalPark/{nationalParkId}
         /// Postman Body: 不需要
         /// </summary>
         /// <param name="nationalParkId"></param>
@@ -83,10 +83,10 @@ namespace ParkyAPI.Controllers
             }
             #endregion
 
-            var obj = _mapper.Map<NationalPark>(nationalParkDto);
+            var targetObj = _mapper.Map<NationalPark>(nationalParkDto);
             try
             {
-                _unitOfWork.NationalPark.Add(obj);
+                _unitOfWork.NationalPark.Add(targetObj);
                 _unitOfWork.Save();
 
                 #region return status 200
@@ -99,14 +99,14 @@ namespace ParkyAPI.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", $"Error occurred during creating data {obj.Name}");
+                ModelState.AddModelError("", $"Error occurred during creating data {targetObj.Name}");
                 return StatusCode(500, ModelState);
             }
         }
 
         /// <summary>
         /// 修改資料[PATCH]
-        /// Postman Url: https://localhost:7063/api/nationalPark/3
+        /// Postman Url: https://localhost:7063/api/nationalPark/{nationalParkId}
         /// Postman Body: raw & JSON
         /// </summary>
         /// <param name="nationalParkId"></param>
@@ -128,10 +128,10 @@ namespace ParkyAPI.Controllers
             }
             #endregion
 
-            var obj = _mapper.Map<NationalPark>(nationalParkDto);
+            var targetObj = _mapper.Map<NationalPark>(nationalParkDto);
             try
             {
-                _unitOfWork.NationalPark.UpdateNationalPark(obj);
+                _unitOfWork.NationalPark.UpdateNationalPark(targetObj);
                 _unitOfWork.Save();
 
                 #region return status 200
@@ -148,7 +148,36 @@ namespace ParkyAPI.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", $"Error occurred during updating data {obj.Name}");
+                ModelState.AddModelError("", $"Error occurred during updating data {targetObj.Name}");
+                return StatusCode(500, ModelState);
+            }
+        }
+
+        /// <summary>
+        /// 刪除單筆資料
+        /// Postman Url: https://localhost:7063/api/nationalPark/{nationalParkId}
+        /// Postman Body: 不需要
+        /// </summary>
+        /// <param name="nationalParkId"></param>
+        /// <returns></returns>
+        [HttpDelete("{nationalParkId:int}", Name = "DeleteNationalPark")]
+        public IActionResult DeleteNationalPark(int nationalParkId)
+        {
+            if (!_unitOfWork.NationalPark.NationalParkExists(nationalParkId))
+            {
+                return NotFound();
+            }
+
+            var targetObj = _unitOfWork.NationalPark.Get(nationalParkId);
+
+            try
+            {
+                _unitOfWork.NationalPark.Remove(targetObj);
+                _unitOfWork.Save();
+                return Ok();
+            }catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Error occurred during deleting data {targetObj.Name}");
                 return StatusCode(500, ModelState);
             }
         }
