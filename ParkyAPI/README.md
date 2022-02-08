@@ -1,7 +1,7 @@
 ﻿<h2>.Net 6 RESTful WebAPI</h2>
 
 <div>
-<h5>NuGet安裝套件</h5>
+<h3>NuGet安裝套件</h3>
 <ul>
     <li>Microsoft.EntityFrameworkCore</li>
     <li>Microsoft.EntityFrameworkCore.SqlServer</li>
@@ -11,16 +11,26 @@
 </ul>
 </div>
 
-2. 資料庫連線字串: 
-    在appSettings.json內新增
+<div>
+<h3>資料庫連線字串</h3>
+<pre>
+在appSettings.json內新增
     "ConnectionStrings": {
         "DefaultConnection": "資料庫連線位置" 
     }
+</pre>
+</div>
 
-3. Repository & UnitOfWork:
-    工廠模式; 共通方法寫在基底IRepository, Repository
+<div>
+<h3>Repository & UnitOfWork</h3>
+<p>工廠模式; 共通方法寫在基底IRepository, Repository</p>
+<p>類別整合在UnitOfWork內</p>
+<p>Program.cs註冊 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();</p>
+</div>
 
-4. AutoMapper & Dto:
-    建立ParkyMappings.cs, 並繼承Profile; 在建構式內增減需要映射的 Model & Dto
-    Program.cs需註冊 builder.Services.AddAutoMapper(typeof(ParkyMappings));
+<div>
+<h3>AutoMapper & Dto</h3>
+<p>建立ParkyMappings.cs, 並繼承Profile; 在建構式內增減需要映射的 Model & Dto</p>
+<p>Program.cs註冊 builder.Services.AddAutoMapper(typeof(ParkyMappings));</p>
+</div>    
     
