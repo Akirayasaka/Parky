@@ -21,6 +21,7 @@ namespace ParkyAPI.Controllers
 
         /// <summary>
         /// 取得NationalPark列表
+        /// Postman Example: https://localhost:7063/api/nationalPark
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -37,5 +38,24 @@ namespace ParkyAPI.Controllers
             // 透過Dto中介, 避免直接存取model, 降低耦合
             return Ok(objDto);
         }
+
+        /// <summary>
+        /// 取單筆資料
+        /// Postman Example: https://localhost:7063/api/nationalPark/3
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{nationalParkId:int}")]
+        public IActionResult GetNationalPark(int nationalParkId)
+        {
+            var obj = _unitOfWork.NationalPark.Get(nationalParkId);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            var objDto = _mapper.Map<NationalParkDto>(obj);
+            return Ok(objDto);
+        }
+
     }
 }
