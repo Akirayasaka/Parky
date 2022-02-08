@@ -4,6 +4,6 @@
     {
         INationalParkRepository NationalPark { get; }
 
-        bool Save();
+        void Save();
     }
 }

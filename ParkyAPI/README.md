@@ -16,7 +16,7 @@
 <pre>
 在appSettings.json內新增
     "ConnectionStrings": {
-        "DefaultConnection": "資料庫連線位置" 
+        "DefaultConnection": "資料庫連線位置"
     }
 </pre>
 </div>

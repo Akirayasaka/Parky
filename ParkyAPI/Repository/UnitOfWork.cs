@@ -20,10 +20,9 @@ namespace ParkyAPI.Repository
             _db.Dispose();
         }
 
-        public bool Save()
+        public void Save()
         {
             _db.SaveChanges();
-            return _db.SaveChanges() >= 0;
         }
     }
 }

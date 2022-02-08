@@ -21,7 +21,7 @@ namespace ParkyAPI.Controllers
         }
 
         /// <summary>
-        /// 取得NationalPark列表
+        /// 取得NationalPark列表[GET]
         /// Postman Url: https://localhost:7063/api/nationalPark
         /// Postman Body: 不需要
         /// </summary>
@@ -42,7 +42,7 @@ namespace ParkyAPI.Controllers
         }
 
         /// <summary>
-        /// 取單筆資料
+        /// 取單筆資料[GET]
         /// Postman Url: https://localhost:7063/api/nationalPark/3
         /// Postman Body: 不需要
         /// </summary>
@@ -61,7 +61,7 @@ namespace ParkyAPI.Controllers
         }
 
         /// <summary>
-        /// 新增資料
+        /// 新增資料[POST]
         /// Postman Url: https://localhost:7063/api/nationalPark
         /// Postman Body: raw & JSON
         /// </summary>
@@ -84,7 +84,6 @@ namespace ParkyAPI.Controllers
             #endregion
 
             var obj = _mapper.Map<NationalPark>(nationalParkDto);
-
             try
             {
                 _unitOfWork.NationalPark.Add(obj);
@@ -101,6 +100,55 @@ namespace ParkyAPI.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", $"Error occurred during creating data {obj.Name}");
+                return StatusCode(500, ModelState);
+            }
+        }
+
+        /// <summary>
+        /// 修改資料[PATCH]
+        /// Postman Url: https://localhost:7063/api/nationalPark/3
+        /// Postman Body: raw & JSON
+        /// </summary>
+        /// <param name="nationalParkId"></param>
+        /// <param name="nationalParkDto"></param>
+        /// <returns></returns>
+        [HttpPatch("{nationalParkId:int}", Name = "UpdateNationalPark")]
+        public IActionResult UpdateNationalPark(int nationalParkId, [FromBody] NationalParkDto nationalParkDto)
+        {
+            if (nationalParkDto == null || nationalParkId != nationalParkDto.Id)
+            {
+                return BadRequest(ModelState);
+            }
+
+            #region 確認名稱是否重複
+            if (_unitOfWork.NationalPark.NationalParkExists(nationalParkDto.Name))
+            {
+                ModelState.AddModelError("", "National Park Exists!");
+                return StatusCode(404, ModelState);
+            }
+            #endregion
+
+            var obj = _mapper.Map<NationalPark>(nationalParkDto);
+            try
+            {
+                _unitOfWork.NationalPark.UpdateNationalPark(obj);
+                _unitOfWork.Save();
+
+                #region return status 200
+                return Ok();
+                #endregion
+
+                #region return status 201
+                //return CreatedAtRoute("GetNationalPark", new { nationalParkId = obj.Id}, obj);
+                #endregion
+
+                #region return status 204
+                //return NoContent();
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Error occurred during updating data {obj.Name}");
                 return StatusCode(500, ModelState);
             }
         }
