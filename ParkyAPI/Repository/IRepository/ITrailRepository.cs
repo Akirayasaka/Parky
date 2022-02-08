@@ -7,6 +7,6 @@ namespace ParkyAPI.Repository.IRepository
         bool TrailExists(string name);
         bool TrailExists(int id);
         void UpdateTrail(Trail entity);
-        ICollection<Trail> GetTrailsInNationalPark(int npId);
+        //ICollection<Trail> GetTrailsInNationalPark(int npId);
     }
 }

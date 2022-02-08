@@ -38,9 +38,9 @@ namespace ParkyAPI.Repository
             }
         }
 
-        public ICollection<Trail> GetTrailsInNationalPark(int npId)
-        {
-            return _db.Trails.Include(x => x.NationalPark).Where(x => x.NationalParkId == npId).ToList();
-        }
+        //public ICollection<Trail> GetTrailsInNationalPark(int npId)
+        //{
+        //    return _db.Trails.Include(x => x.NationalPark).Where(x => x.NationalParkId == npId).ToList();
+        //}
     }
 }

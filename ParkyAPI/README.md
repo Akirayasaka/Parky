@@ -41,4 +41,5 @@
 <p>Program.cs註冊</p>
 <p>新增ConfigureSwaggerOptions.cs作為設定檔</p>
 <p>API Controller變更Route標籤屬性</p>
+<p>API Controller就算沒有掛此標籤[ApiVersion("x.0")], 預設值為1.0</p>
 </div>
