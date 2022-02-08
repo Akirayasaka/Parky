@@ -146,12 +146,12 @@ namespace ParkyAPI.Controllers
         [HttpDelete("{trailId:int}", Name = "DeleteTrail")]
         public IActionResult DeleteTrail(int trailId)
         {
-            if (_unitOfWork.Trail.TrailExists(trailId))
+            if (!_unitOfWork.Trail.TrailExists(trailId))
             {
                 return NotFound();
             }
 
-            var trailObj = _unitOfWork.Trail.GetFirstOrDefault(filter: x => x.Id == trailId, includeProperties: "NationalPark");
+            var trailObj = _unitOfWork.Trail.GetFirstOrDefault(filter: x => x.Id == trailId);
             try
             {
                 _unitOfWork.Trail.Remove(trailObj);
