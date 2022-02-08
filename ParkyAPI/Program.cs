@@ -1,11 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using ParkyAPI.Data;
+using ParkyAPI.Repository;
+using ParkyAPI.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 #region 註冊資料庫連線方式(對照appsettings.json=>ConnectionStrings)
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+#endregion
+
+#region 註冊DI
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 #endregion
 
 builder.Services.AddControllers();
