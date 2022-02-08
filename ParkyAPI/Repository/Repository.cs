@@ -6,13 +6,13 @@ namespace ParkyAPI.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly DbContext _db;
+        protected readonly DbContext DbContext;
         internal DbSet<T> DbSet;
 
-        public Repository(DbContext db)
+        public Repository(DbContext context)
         {
-            _db = db;
-            DbSet = db.Set<T>();
+            DbContext = context;
+            DbSet = context.Set<T>();
         }
 
         public void Add(T entity)
