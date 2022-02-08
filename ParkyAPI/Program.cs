@@ -22,7 +22,45 @@ builder.Services.AddAutoMapper(typeof(ParkyMappings));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("ParkyOpenAPISpecNP",
+        new Microsoft.OpenApi.Models.OpenApiInfo()
+        {
+            Title = "Parky API(National Park)",
+            Version = "1",
+            Description = "Parky API: NationalPark",
+            Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+            {
+                Email = "abc@abc.com",
+                Name = "Tester",
+                Url = new Uri("https://www.google.com")
+            },
+            License = new Microsoft.OpenApi.Models.OpenApiLicense() 
+            {
+                Name = "MIT License",
+                Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
+            }
+        });
+    options.SwaggerDoc("ParkyOpenAPISpecTrails",
+        new Microsoft.OpenApi.Models.OpenApiInfo()
+        {
+            Title = "Parky API(Trails)",
+            Version = "1",
+            Description = "Parky API: Trail",
+            Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+            {
+                Email = "abc@abc.com",
+                Name = "Tester",
+                Url = new Uri("https://www.google.com")
+            },
+            License = new Microsoft.OpenApi.Models.OpenApiLicense()
+            {
+                Name = "MIT License",
+                Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
+            }
+        });
+});
 
 
 var app = builder.Build();
@@ -31,7 +69,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options => {
+        options.SwaggerEndpoint("/swagger/ParkyOpenAPISpecNP/swagger.json", "Parky API NationalPark");
+        options.SwaggerEndpoint("/swagger/ParkyOpenAPISpecTrails/swagger.json", "Parky API Trails");
+    });
 }
 
 app.UseHttpsRedirection();

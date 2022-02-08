@@ -9,6 +9,7 @@ namespace ParkyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "ParkyOpenAPISpecTrails")]
     public class TrailController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
