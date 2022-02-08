@@ -1,11 +1,15 @@
 ﻿<h2>.Net 6 RESTful WebAPI</h2>
 
-1. NuGet安裝套件:
-    Microsoft.EntityFrameworkCore
-    Microsoft.EntityFrameworkCore.SqlServer
-    Microsoft.EntityFrameworkCore.Tools
-    AutoMapper
-    AutoMapper.Extensions.Microsoft.DependencyInjection
+<div>
+<h5>NuGet安裝套件</h5>
+<ul>
+    <li>Microsoft.EntityFrameworkCore</li>
+    <li>Microsoft.EntityFrameworkCore.SqlServer</li>
+    <li>Microsoft.EntityFrameworkCore.Tools</li>
+    <li>AutoMapper</li>
+    <li>AutoMapper.Extensions.Microsoft.DependencyInjection</li>
+</ul>
+</div>
 
 2. 資料庫連線字串: 
     在appSettings.json內新增
