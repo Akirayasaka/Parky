@@ -25,12 +25,12 @@
 <h3>Repository & UnitOfWork</h3>
 <p>工廠模式; 共通方法寫在基底IRepository, Repository</p>
 <p>類別整合在UnitOfWork內</p>
-<p>Program.cs註冊 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();</p>
+<p>Program.cs註冊 <pre>builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();</pre></p>
 </div>
 
 <div>
 <h3>AutoMapper & Dto</h3>
 <p>建立ParkyMappings.cs, 並繼承Profile; 在建構式內增減需要映射的 Model & Dto</p>
-<p>Program.cs註冊 builder.Services.AddAutoMapper(typeof(ParkyMappings));</p>
+<p>Program.cs註冊 <pre>builder.Services.AddAutoMapper(typeof(ParkyMappings));</pre></p>
 </div>    
     
