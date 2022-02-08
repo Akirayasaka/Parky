@@ -8,6 +8,8 @@
     <li>Microsoft.EntityFrameworkCore.Tools</li>
     <li>AutoMapper</li>
     <li>AutoMapper.Extensions.Microsoft.DependencyInjection</li>
+    <li>Microsoft.AspNetCore.Mvc.Versioning</li>
+    <li>Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer</li>
 </ul>
 </div>
 
@@ -33,4 +35,10 @@
 <p>建立ParkyMappings.cs, 並繼承Profile; 在建構式內增減需要映射的 Model & Dto</p>
 <p>Program.cs註冊 <pre>builder.Services.AddAutoMapper(typeof(ParkyMappings));</pre></p>
 </div>    
-    
+
+<div>
+<h3>API文件版控</h3>
+<p>Program.cs註冊</p>
+<p>新增ConfigureSwaggerOptions.cs作為設定檔</p>
+<p>API Controller變更Route標籤屬性</p>
+</div>

@@ -7,9 +7,10 @@ using ParkyAPI.Repository.IRepository;
 
 namespace ParkyAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(GroupName = "ParkyOpenAPISpecTrails")]
+    [Route("api/v{version:apiVersion}/trails")]
+    //[Route("api/[controller]")]
+    //[ApiExplorerSettings(GroupName = "ParkyOpenAPISpecTrails")]
     public class TrailController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -58,11 +59,16 @@ namespace ParkyAPI.Controllers
             return Ok(objDto);
         }
 
+        /// <summary>
+        /// 找出關聯nationalParkId的資料
+        /// </summary>
+        /// <param name="nationalParkId"></param>
+        /// <returns></returns>
         [HttpGet("[action]/{nationalParkId:int}")]
         public IActionResult GetTrailInNationalPark(int nationalParkId)
         {
-            var objList = _unitOfWork.Trail.GetTrailsInNationalPark(nationalParkId);
-            //var objList2 = _unitOfWork.Trail.GetAll(filter: x=> x.NationalParkId == nationalParkId, includeProperties: "NationalPark");
+            //var objList = _unitOfWork.Trail.GetTrailsInNationalPark(nationalParkId);
+            var objList = _unitOfWork.Trail.GetAll(filter: x=> x.NationalParkId == nationalParkId, includeProperties: "NationalPark");
             if(objList == null)
             {
                 return NotFound();
