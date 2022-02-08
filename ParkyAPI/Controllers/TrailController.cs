@@ -82,7 +82,7 @@ namespace ParkyAPI.Controllers
         /// <param name="trailDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CreateTrail([FromBody] TrailDto trailDto)
+        public IActionResult CreateTrail([FromBody] TrailCreateDto trailDto)
         {
             if(trailDto == null)
             {
@@ -116,7 +116,7 @@ namespace ParkyAPI.Controllers
         /// <param name="trailDto"></param>
         /// <returns></returns>
         [HttpPatch("{trailId:int}", Name = "UpdateTrail")]
-        public IActionResult UpdateTrail(int trailId, [FromBody] TrailDto trailDto)
+        public IActionResult UpdateTrail(int trailId, [FromBody] TrailUpdateDto trailDto)
         {
             if(trailDto == null || trailId != trailDto.Id)
             {

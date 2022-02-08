@@ -25,7 +25,6 @@ namespace ParkyAPI.Repository
 
         public void UpdateNationalPark(NationalPark entity)
         {
-            var target = _db.NationalParks.FirstOrDefault(x => x.Id == entity.Id);
             try
             {
                 _db.NationalParks.Update(entity);

@@ -27,7 +27,6 @@ namespace ParkyAPI.Repository
 
         public void UpdateTrail(Trail entity)
         {
-            var target = _db.Trails.FirstOrDefault(x => x.Id == entity.Id);
             try
             {
                 _db.Trails.Update(entity);
