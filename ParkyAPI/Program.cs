@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ParkyAPI.Data;
+using ParkyAPI.ParkyMapper;
 using ParkyAPI.Repository;
 using ParkyAPI.Repository.IRepository;
 
@@ -12,6 +13,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 
 #region 註冊DI
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+#endregion
+
+#region 註冊AutoMapper(整合管理Dto, 異動Dto只需在ParkyMappings.cs內做增減)
+builder.Services.AddAutoMapper(typeof(ParkyMappings));
 #endregion
 
 builder.Services.AddControllers();
