@@ -14,7 +14,7 @@ createApp({
         });
 
         const fetchData = () => {
-            axios.get("/nationalParks/GetAllNationalPark").then((s) => {
+            axios.get("/trails/GetAllTrail").then((s) => {
                 console.log(s);
                 objectData.responseData.list = s.data.data;
                 $('#dataTable').DataTable().destroy();
@@ -22,7 +22,7 @@ createApp({
         }
 
         const Delete = (id) => {
-            const url = `/nationalParks/Delete/${id}`;
+            const url = `/trails/Delete/${id}`;
             
             //API
             Swal.fire({
@@ -58,7 +58,7 @@ createApp({
             Delete
         }
     }
-}).mount('#nationalPark_Index');
+}).mount('#trail_Index');
 
 // #region [表格初始化]
 function DtInit() {
@@ -67,9 +67,11 @@ function DtInit() {
         //lengthMenu: [[15, 50, -1], [15, 50, "全部"]],
         lengthMenu: [[-1], ["全部"]],
         columnDefs: [
-            { "width": "50%", "targets": 0 },
-            { "width": "30%", "targets": 1 },
-            { "width": "20%", "targets": 2, "orderable": false }
+            { "width": "25%", "targets": 0 },
+            { "width": "20%", "targets": 1 },
+            { "width": "15%", "targets": 2 },
+            { "width": "15%", "targets": 3 },
+            { "width": "25%", "targets": 4, "orderable": false }
         ],
         dom: "ftip",
         //ordering: false,

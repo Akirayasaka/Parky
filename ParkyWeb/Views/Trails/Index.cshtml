@@ -1,0 +1,52 @@
+﻿@{
+}
+
+<div id="trail_Index">
+    <div class="p-4" style="border-radius:20px;">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-primary">Trail 列表</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a asp-action="Upsert" class="btn btn-primary text-white"><i class="fas fa-plus"></i> &nbsp; 新增資料</a>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="p-3 rounded">
+            <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr class="table-danger">
+                        <th>National Park</th>
+                        <th>Trail Name</th>
+                        <th>Distance</th>
+                        <th>Elevation</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in objectData.responseData.list">
+                        <td class="align-middle">{{item.nationalPark.name}}</td>
+                        <td class="align-middle">{{item.name}}</td>
+                        <td class="align-middle">{{item.distance}}</td>
+                        <td class="align-middle">{{item.elevation}}</td>
+                        <td class="align-middle">
+                            <div class="text-center">
+                                <a :href="'/trails/Upsert/'+item.id" class="btn btn-success text-white" style="cursor: pointer;">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <a class="btn btn-danger text-white ms-2" style="cursor: pointer;" @@click.prevent="Delete(item.id)">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script src="~/js/Vue/Trails/Index.js"></script>
+}

@@ -4,10 +4,10 @@
     <div class="p-4" style="border-radius: 20px;">
         <div class="row">
             <div class="col-6">
-                <h2 class="text-primary">National Park List</h2>
+                <h2 class="text-primary">National Park 列表</h2>
             </div>
             <div class="col-6 text-end">
-                <a class="btn btn-primary text-white"><i class="fas fa-plus"></i> &nbsp; Create New National Park</a>
+                <a asp-action="Upsert" class="btn btn-primary text-white"><i class="fas fa-plus"></i> &nbsp; 新增資料</a>
             </div>
             <br />
             <br />
@@ -26,7 +26,7 @@
                             <td class="align-middle">{{item.state}}</td>
                             <td class="align-middle">
                                 <div class="text-center">
-                                    <a href="'/nationalParks/Upsert/'+item.id" class="btn btn-success text-white" style="cursor: pointer;">
+                                    <a :href="'/nationalParks/Upsert/'+item.id" class="btn btn-success text-white" style="cursor: pointer;">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     <a class="btn btn-danger text-white ms-2" style="cursor: pointer;" @@click.prevent="Delete(item.id)">
@@ -43,5 +43,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/Vue/NationalParks/Index.js" defer></script>
+    <script src="~/js/Vue/NationalParks/Index.js"></script>
 }
