@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ParkyAPI.Models
+namespace ParkyAPI.Models.Dtos
 {
-    public class User
+    public class UserDto
     {
-        public int Id { get; set; }
+        [Required]
         public string Username { get; set; }
+        [Required]
         public string Password { get; set; }
-        public string Role { get; set; }
-        [NotMapped]
-        public string Token { get; set; }
+        
     }
 }

@@ -4,6 +4,7 @@
     {
         INationalParkRepository NationalPark { get; }
         ITrailRepository Trail { get; }
+        IUserRepository User { get; }
 
         void Save();
     }
