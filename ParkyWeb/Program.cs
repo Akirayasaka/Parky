@@ -1,7 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
+#region Nuget安裝: Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+//builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+#endregion
+
+#region Http連線
+builder.Services.AddHttpClient();
+#endregion
 
 var app = builder.Build();
 
