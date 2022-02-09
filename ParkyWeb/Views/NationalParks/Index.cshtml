@@ -1,4 +1,47 @@
-﻿@{
-}
+﻿
 
-<h1>National Parks</h1>
+<div id="nationalPark_Index">
+    <div class="p-4" style="border-radius: 20px;">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-primary">National Park List</h2>
+            </div>
+            <div class="col-6 text-end">
+                <a class="btn btn-primary text-white"><i class="fas fa-plus"></i> &nbsp; Create New National Park</a>
+            </div>
+            <br />
+            <br />
+            <div class="p-3 rounded">
+                <table id="dataTable" class="table table-bordered table-striped w-100">
+                    <thead>
+                        <tr class="table-danger">
+                            <th class="text-center">Name</th>
+                            <th class="text-center">State</th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in objectData.responseData.list">
+                            <td class="align-middle">{{item.name}}</td>
+                            <td class="align-middle">{{item.state}}</td>
+                            <td class="align-middle">
+                                <div class="text-center">
+                                    <a href="'/nationalParks/Upsert/'+item.id" class="btn btn-success text-white" style="cursor: pointer;">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger text-white ms-2" style="cursor: pointer;" @@click.prevent="Delete(item.id)">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Vue/NationalParks/Index.js" defer></script>
+}
