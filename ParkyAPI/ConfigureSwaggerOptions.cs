@@ -4,6 +4,9 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ParkyAPI
 {
+    /// <summary>
+    /// Swagger API文件設定
+    /// </summary>
     public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         readonly IApiVersionDescriptionProvider _provider;
