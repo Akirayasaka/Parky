@@ -1,3 +1,6 @@
+using ParkyWeb.Repository;
+using ParkyWeb.Repository.IRepository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +13,11 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 #region Http³s½u
 builder.Services.AddHttpClient();
 #endregion
+
+#region µù¥UDI
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+#endregion
+
 
 var app = builder.Build();
 
