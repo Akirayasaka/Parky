@@ -4,6 +4,6 @@
     {
         INationalParkRepository NationalPark { get; }
         ITrailRepository Trail { get; }
-
+        IAccountRepository Account { get; }
     }
 }

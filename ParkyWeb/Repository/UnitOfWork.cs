@@ -11,9 +11,11 @@ namespace ParkyWeb.Repository
             _clientFactory = clientFactory;
             NationalPark = new NationalParkRepository(clientFactory);
             Trail = new TrailRepository(clientFactory);
+            Account = new AccountRepository(clientFactory);
         }
 
         public INationalParkRepository NationalPark { get; private set; }
         public ITrailRepository Trail { get; private set; }
+        public IAccountRepository Account { get; private set; }
     }
 }
