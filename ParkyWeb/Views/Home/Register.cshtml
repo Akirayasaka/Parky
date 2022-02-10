@@ -1,0 +1,16 @@
+﻿@model ParkyWeb.Models.User
+
+<div class="w-50 mx-auto">
+    <h1>Register</h1>
+    <form method="post">
+        <div class="mb-3">
+            <label for="Username" class="form-label">Username</label>
+            <input class="form-control" asp-for="Username" type="text" placeholder="Username..." id="Username" />
+        </div>
+        <div class="mb-3">
+            <label for="Password" class="form-label">Password</label>
+            <input class="form-control" asp-for="Password" type="password" placeholder="Password..." id="Password" />
+        </div>
+        <button class="btn btn-primary" type="submit" value="Submit">Register</button>
+    </form>
+</div>
