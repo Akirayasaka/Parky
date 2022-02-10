@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using ParkyWeb.Models;
 using ParkyWeb.Models.ViewModel;
 using ParkyWeb.Repository.IRepository;
@@ -26,6 +27,53 @@ namespace ParkyWeb.Controllers
             };
             return View(indexVM);
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            User obj = new();
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(User obj)
+        {
+            User user = await _unitOfWork.Account.LoginAsync(SD.AccountAPIPath + "authenticate/", obj);
+            if (user.Token == null)
+            {
+                return View();
+            }
+
+            HttpContext.Session.SetString("JWToken", user.Token);
+            return RedirectToAction("~/Home/Index");
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(User obj)
+        {
+            bool result = await _unitOfWork.Account.RegisterAsync(SD.AccountAPIPath + "register/", obj);
+            if (result == false)
+            {
+                return View();
+            }
+            return RedirectToAction("~/Home/Login");
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            HttpContext.Session.SetString("JWToken", "");
+            return RedirectToAction("~/Home/Index");
+        }
+
 
         public IActionResult Privacy()
         {

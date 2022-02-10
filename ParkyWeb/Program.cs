@@ -18,6 +18,16 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 #endregion
 
+#region 啟用Session功能
+builder.Services.AddSession(options =>
+{
+    // Set a short timeout for easy testing.
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.Cookie.HttpOnly = true;
+    // Make the session cookie essential
+    options.Cookie.IsEssential = true;
+});
+#endregion
 
 var app = builder.Build();
 
@@ -33,6 +43,16 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+#region 啟用Session & 授權
+app.UseCors(x => x
+             .AllowAnyOrigin()
+             .AllowAnyMethod()
+             .AllowAnyHeader());
+
+app.UseSession();
+app.UseAuthentication();
+#endregion
 
 app.UseAuthorization();
 
