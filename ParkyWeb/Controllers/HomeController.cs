@@ -22,8 +22,8 @@ namespace ParkyWeb.Controllers
         {
             IndexVM indexVM = new()
             {
-                NationalParkList = await _unitOfWork.NationalPark.GetAllAsync(SD.NationalParkAPIPath),
-                TrailList = await _unitOfWork.Trail.GetAllAsync(SD.TrailAPIPath)
+                NationalParkList = await _unitOfWork.NationalPark.GetAllAsync(SD.NationalParkAPIPath, HttpContext.Session.GetString("JWToken")),
+                TrailList = await _unitOfWork.Trail.GetAllAsync(SD.TrailAPIPath, HttpContext.Session.GetString("JWToken"))
             };
             return View(indexVM);
         }
