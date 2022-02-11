@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using ParkyWeb.Repository;
 using ParkyWeb.Repository.IRepository;
 
@@ -16,6 +17,18 @@ builder.Services.AddHttpClient();
 
 #region 註冊DI
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+#endregion
+
+#region 啟用身分驗證(Cookie)
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Cookie時效性
+    options.LoginPath = "/Home/Login";
+    options.AccessDeniedPath = "/Home/AccessDenied";
+    options.SlidingExpiration = true; //只要有觸發身分驗證行為, 就會延長時效
+});
+builder.Services.AddHttpContextAccessor();
 #endregion
 
 #region 啟用Session功能
