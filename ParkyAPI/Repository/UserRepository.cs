@@ -29,7 +29,7 @@ namespace ParkyAPI.Repository.IRepository
                 return null;
             }
 
-            //if user was found generate JWT Token
+            #region if user was found generate JWT Token
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -42,6 +42,7 @@ namespace ParkyAPI.Repository.IRepository
                 SigningCredentials = new SigningCredentials
                                 (new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+            #endregion
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);

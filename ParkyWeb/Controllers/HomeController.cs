@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using ParkyWeb.Models;
 using ParkyWeb.Models.ViewModel;
 using ParkyWeb.Repository.IRepository;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace ParkyWeb.Controllers
 {
@@ -45,6 +47,13 @@ namespace ParkyWeb.Controllers
                 return View();
             }
 
+            var identiry = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+            identiry.AddClaim(new Claim(ClaimTypes.Name, obj.Username));
+            identiry.AddClaim(new Claim(ClaimTypes.Role, obj.Role));
+            var principal = new ClaimsPrincipal(identiry);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+            // 登入成功, 於Session設定JWToken, For API requestHeader
             HttpContext.Session.SetString("JWToken", user.Token);
             return RedirectToAction("Index");
         }
@@ -69,9 +78,15 @@ namespace ParkyWeb.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            //await HttpContext.SignOutAsync();
+            await HttpContext.SignOutAsync();
             HttpContext.Session.SetString("JWToken", "");
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
 
