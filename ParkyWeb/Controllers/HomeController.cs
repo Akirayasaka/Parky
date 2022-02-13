@@ -55,6 +55,9 @@ namespace ParkyWeb.Controllers
 
             // 登入成功, 於Session設定JWToken, For API requestHeader
             HttpContext.Session.SetString("JWToken", user.Token);
+
+            TempData["alert"] = "Welcome" + user.Username;
+
             return RedirectToAction("Index");
         }
 
@@ -73,6 +76,7 @@ namespace ParkyWeb.Controllers
             {
                 return View();
             }
+            TempData["alert"] = "Registeration Sccucessful";
             return RedirectToAction("Login");
         }
 
