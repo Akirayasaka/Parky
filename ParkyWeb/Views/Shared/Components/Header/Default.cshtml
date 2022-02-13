@@ -20,16 +20,18 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                     </li>*@
-
-                    @if(httpAccessor.HttpContext.Session.GetString("JWToken") != null && 
-                    httpAccessor.HttpContext.Session.GetString("JWToken").ToString().Length > 0)
-                    {
+                    @if(User.IsInRole("Admin") || User.IsInRole("Tester")){
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="NationalParks" asp-action="Index">Nation Park</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Trails" asp-action="Index">Trail</a>
                         </li>
+                    }
+
+                    @if(httpAccessor.HttpContext.Session.GetString("JWToken") != null && 
+                    httpAccessor.HttpContext.Session.GetString("JWToken").ToString().Length > 0)
+                    {
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
                         </li>

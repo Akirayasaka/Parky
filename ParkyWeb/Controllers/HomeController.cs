@@ -47,10 +47,10 @@ namespace ParkyWeb.Controllers
                 return View();
             }
 
-            var identiry = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            identiry.AddClaim(new Claim(ClaimTypes.Name, obj.Username));
-            identiry.AddClaim(new Claim(ClaimTypes.Role, obj.Role));
-            var principal = new ClaimsPrincipal(identiry);
+            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+            identity.AddClaim(new Claim(ClaimTypes.Name, user.Username));
+            identity.AddClaim(new Claim(ClaimTypes.Role, user.Role));
+            var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
             // 登入成功, 於Session設定JWToken, For API requestHeader

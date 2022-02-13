@@ -30,7 +30,7 @@ namespace ParkyWeb.Repository
             #region 設定token於request header
             if ( token != null && token.Length != 0)
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer ", token);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
             #endregion
 
@@ -45,7 +45,7 @@ namespace ParkyWeb.Repository
 
             if(token != null && token.Length != 0)
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer ", token);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
 
             HttpResponseMessage response = await client.SendAsync(request);
@@ -59,7 +59,7 @@ namespace ParkyWeb.Repository
 
             if (token != null && token.Length != 0)
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer ", token);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
 
             HttpResponseMessage response = await client.SendAsync(request);
@@ -81,7 +81,7 @@ namespace ParkyWeb.Repository
 
             if (token != null && token.Length != 0)
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer ", token);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
 
             HttpResponseMessage response = await client.SendAsync(request);
@@ -112,7 +112,7 @@ namespace ParkyWeb.Repository
 
             if (token != null && token.Length != 0)
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer ", token);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             }
 
             HttpResponseMessage response = await client.SendAsync(request);
